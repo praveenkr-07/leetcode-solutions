@@ -28,7 +28,6 @@ class Solution {
 class Solution {
     vector<int> dp;
     int helper(int k , vector<int>& height , int idx){
-        dp.resize(height.size()+100 , -1);
         if(idx == height.size()-1) return 0;
         
         if(dp[idx]!=-1) return dp[idx];
@@ -48,6 +47,7 @@ class Solution {
   public:
     int index = 0;
     int minCost(vector<int>& height) {
+        dp.resize(height.size(),-1);
         return helper(2,height,0);
     }
 }; 
@@ -56,6 +56,7 @@ class Solution {
 class Solution {
   public:
     int minCost(vector<int>& height) {
+        int k = 2;
         int n = height.size();
         vector<int> dp;
         dp.resize(n , INT_MAX);
