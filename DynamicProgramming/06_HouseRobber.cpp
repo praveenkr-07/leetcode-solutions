@@ -1,0 +1,15 @@
+class Solution {
+    vector<int> dp;
+    int helper(vector<int>& nums, int idx  ){
+        if(idx >= nums.size()) return 0;
+        if(idx == nums.size()-1) return nums[idx];
+        if(idx == nums.size()-2) return max(nums[idx],nums[idx+1]);
+        if (dp[idx] != -1) return dp[idx];
+        return dp[idx] = max(nums[idx] + helper(nums, idx+2), helper(nums, idx+1));
+    }
+public:
+    int rob(vector<int>& nums) {
+        dp.resize(nums.size(),-1);
+        return helper(nums,0);
+    }
+};
