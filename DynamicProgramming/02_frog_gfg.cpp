@@ -1,4 +1,5 @@
 //https://www.geeksforgeeks.org/problems/geek-jump/1
+
 // Pure Brute Forece solution 
 class Solution {
     int helper(int k , vector<int>& height , int idx){
@@ -22,7 +23,6 @@ class Solution {
         return helper(2,height,0);
     }
 }; 
-
 
 // optimized with memoization / top down 
 class Solution {
