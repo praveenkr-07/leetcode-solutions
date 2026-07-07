@@ -1,0 +1,31 @@
+class Solution
+{
+    static bool cmp(vector<int> &a, vector<int> &b)
+    {
+        if (a[0] != b[0])
+            return a[0] < b[0];
+        return a[1] > b[1];
+    }
+
+public:
+    int removeCoveredIntervals(vector<vector<int>> &intervals)
+    {
+        int n = intervals.size();
+        sort(intervals.begin(), intervals.end(), cmp);
+        int overlapping = 0;
+        int lastMaxEnd = intervals[0][1];
+        for (int i = 1; i < n; i++)
+        {
+            int currEnd = intervals[i][1];
+            if (currEnd <= lastMaxEnd)
+            {
+                overlapping++;
+            }
+            else
+            {
+                lastMaxEnd = currEnd;
+            }
+        }
+        return (n - overlapping);
+    }
+};

@@ -1,29 +1,61 @@
-class Solution {
+class Solution
+{
     vector<vector<int>> dp;
-    int helper(int er , int ec){
+    int helper(int er, int ec)
+    {
         dp[1][1] = 1;
-        for (int i = 1; i <= er; i++) {
-            for (int j = 1; j <= ec; j++) {
+        for (int i = 1; i <= er; i++)
+        {
+            for (int j = 1; j <= ec; j++)
+            {
 
-                if (i == 1 && j == 1) continue;
+                if (i == 1 && j == 1)
+                    continue;
 
                 int rightways = 0;
-                if(j-1>=1) rightways = dp[i][j-1];
-                else rightways = 0;
+                if (j - 1 >= 1)
+                    rightways = dp[i][j - 1];
+                else
+                    rightways = 0;
 
-                 int downways = 0;
-                if(i-1>=1) downways = dp[i-1][j];
-                else downways = 0;
-
+                int downways = 0;
+                if (i - 1 >= 1)
+                    downways = dp[i - 1][j];
+                else
+                    downways = 0;
                 dp[i][j] = rightways + downways;
             }
         }
         return dp[er][ec];
     }
+
 public:
-    int uniquePaths(int er , int ec) {
+    int uniquePaths(int er, int ec)
+    {
         dp.clear();
         dp.assign(er + 1, vector<int>(ec + 1, 0));
-        return helper(er,ec);
+        return helper(er, ec);
+    }
+};
+
+class Solution
+{
+    vector<vector<int>> dp;
+    int uniquePathsCount(int er, int ec)
+    {
+        if (er < 1 || ec < 1)
+            return 0;
+        if (er == 1 && ec == 1)
+            return 1;
+        if (dp[er][ec] != -1)
+            return dp[er][ec];
+        return dp[er][ec] = uniquePathsCount(er - 1, ec) + uniquePathsCount(er, ec - 1);
+    }
+
+public:
+    int uniquePaths(int er, int ec)
+    {
+        dp.assign(er + 1, vector<int>(ec + 1, -1));
+        return uniquePathsCount(er, ec);
     }
 };
